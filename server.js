@@ -14,17 +14,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', api);
 app.use(express.static('public'));
 
-// Renders public/index.html
-app.get('*', (req, res) => {
-    res.sendFile(join(__dirname, 'public/index.html'));
-  })
-
 // Renders public/notes.html
 app.get('/notes', (req, res) => {
   res.sendFile(join(__dirname, 'public/notes.html'));
 });
 
-
+// Renders public/index.html
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, 'public/index.html'));
+})
 
 app.listen(port, () => {
   console.log(`Server running at port ${port}.`);
