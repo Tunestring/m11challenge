@@ -17,7 +17,7 @@ async function readJsonFile(req, res, next) {
 }
 
 // Middleware to append new note to existing notes
-function appendNewNote(req, res, next) {
+function editNote(req, res, next) {
   req.body.id = uuidv4();
   res.locals.notes.push(req.body);
   next();
@@ -30,7 +30,7 @@ async function writeJsonFile(req, res, next) {
       join(__dirname, "..", "db", "db.json"),
       JSON.stringify(res.locals.notes, null, 4)
     );
-    res.json("Successfully added note");
+    res.json("Added note!");
   } catch (err) {
     next(err);
   }
@@ -44,7 +44,7 @@ async function deleteNoteById(req, res, next) {
       join(__dirname, "..", "db", "db.json"),
       JSON.stringify(filteredNotes, null, 4)
     );
-    res.json("Successfully deleted note");
+    res.json("Deleted note!");
   } catch (err) {
     next(err);
   }
@@ -56,7 +56,7 @@ notesRouter.get("/", readJsonFile, (req, res) => {
 });
 
 // Route to add new note
-notesRouter.post("/", readJsonFile, appendNewNote, writeJsonFile);
+notesRouter.post("/", readJsonFile, editNote, writeJsonFile);
 
 // Route to delete note by id
 notesRouter.delete("/:id", readJsonFile, deleteNoteById);
