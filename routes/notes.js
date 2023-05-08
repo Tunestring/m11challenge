@@ -1,12 +1,14 @@
-// Require Express
-const express = require('express');
+const notesRouter = require("express").Router();
+const { join } = require("path");
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
 
-// Define routes used
-const notesRouter = require('./notes.js');
-
-// Router creation
-const router = express.Router();
-
-router.use('/notes', notesRouter);
-
-module.exports = router;
+noteGetRouter.get ('/', (req,res) =>{
+    fs.readFile(join(__dirname, "..", "db", "db.json"), (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(JSON.parse(data));
+        }
+    });
+});
