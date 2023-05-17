@@ -2,10 +2,10 @@
 const express = require('express');
 const { join } = require('path');
 const api = require('./routes/index.js');
-// connection details
+// Connection details: Port 3001
 const port = process.env.PORT || 3001;
 
-
+// Creating Express instance
 const app = express();
 
 // Middleware
